@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/551f86eb-0bf8-44ef-8d48-0cfb77b17f00/resourceGroups/ProjectManagement/providers/Microsoft.Web/sites/sumcalculator",
+    "appService.deploySubpath": "."
+}
