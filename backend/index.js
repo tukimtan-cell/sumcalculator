@@ -17,17 +17,20 @@ app.post("/api/sum", (req, res) => {
   res.json({ result });
 });
 
+
+
+const path = require("path");
+
+// Serve frontend statis files
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+// Wildcard route for SPA
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+});
+
 // Azure uses process.env.PORT
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Backend running on port ${PORT}`);
-});
-
-const path = require("path");
-
-// Serve frontend
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
 });
