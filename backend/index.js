@@ -25,8 +25,18 @@ const path = require("path");
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
 // Wildcard route for SPA
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+//app.get("*", (req, res) => {
+//  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+//});
+
+// Catch-all route for SPA (Express 5.x compatible)
+app.use((req, res, next) => {
+  // Only handle non-API routes
+  if (!req.path.startsWith("/api")) {
+    res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+  } else {
+    next();
+  }
 });
 
 // Azure uses process.env.PORT
